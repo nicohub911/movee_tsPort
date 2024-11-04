@@ -1,0 +1,149 @@
+html {
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+  scrollbar-color: #aaaaaa #fff;
+}
+
+nav {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+}
+nav span {
+  font-weight: bold;
+  font-family: sans-serif;
+  margin: 0px 15px;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+nav ul li {
+  font-size: 0.9rem;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+nav ul input {
+  height: 30px;
+  width: 200px;
+  background-color: #596186;
+  border: none;
+  outline: none;
+  padding: 2px 2px 2px 4px;
+  font-size: 0.8rem;
+  font-family: sans-serif;
+  border-radius: 5px 0px 0px 5px;
+  margin-left: 20px;
+}
+nav ul input::-moz-placeholder {
+  color: #fff;
+  font-family: sans-serif;
+}
+nav ul input::placeholder {
+  color: #fff;
+  font-family: sans-serif;
+}
+nav ul button {
+  width: 30px;
+  max-height: 30px;
+  border: none;
+  background-color: #596186;
+  border-radius: 0px 5px 5px 0px;
+  margin-left: -9px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+nav ul button svg {
+  width: 100%;
+}
+nav ul button:hover {
+  background-color: #8f96b6;
+}
+
+header {
+  margin-top: 40px;
+  width: 100%;
+  height: 400px;
+  background-color: #596186;
+}
+
+main {
+  width: 100%;
+  min-height: calc(100vh - 40px);
+  background-color: #dbadad;
+}
+
+footer {
+  background-color: #596186;
+  width: 100%;
+  height: 100px;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 200px;
+  height: 200px;
+  background-color: #000;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card .card__info {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  transition: transform 0.5s;
+}
+
+/*
+.card:hover{
+    .card__info_top-on{
+        transform: translateY(0px);
+    }
+    .card__info_right-on{
+        transform: translateX(0px);
+    }
+    .card__info_bottom-on{
+        transform: translateY(0px);
+    }
+    .card__info_left-on{
+        transform: translateX(0px);
+    }
+}
+@mixin card__info($left, $top) {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    transform: translateX($left) translateY($top);
+    transition: transform 0.13s;
+}
+.card__info_top-on{
+    @include card__info(0px,-200px);
+}
+.card__info_right-on{
+    @include card__info(200px,0px);
+}
+.card__info_bottom-on{
+    @include card__info(0px,200px);
+}
+.card__info_left-on{
+    @include card__info(-200px,0px);
+}
+*//*# sourceMappingURL=style.css.map */
