@@ -3,7 +3,9 @@ html{
     scroll-behavior: smooth;
     scrollbar-color: #aaaaaa #fff;
 }
-
+body{
+    background-color: #dfdfdf;
+}
 nav{
     position: fixed;
     top: 0px;
@@ -12,17 +14,18 @@ nav{
     height: 40px;
     display: flex;
     align-items: center;
-    background-color: #fff;
-    span{
-        font-weight: bold;
-        font-family: sans-serif;
-        margin: 0px 15px;
+    background-color: #e7e7e7;
+    z-index: 900;
+    img{
+        height: 100%;
+        padding: 8px;
+        margin-right: 10px;
     }
     ul{
         list-style: none;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 20px;
         li{
             font-size: 0.9rem;
             font-family: sans-serif;
@@ -31,47 +34,94 @@ nav{
         input{
             height: 30px;
             width: 200px;
-            background-color: #596186;
+            background-color: #cacaca;
             border: none;
             outline: none;
             padding: 2px 2px 2px 4px;
             font-size: 0.8rem;
             font-family: sans-serif;
-            border-radius: 5px 0px 0px 5px;
-            margin-left: 20px;   
+            border-radius: 0px 5px 5px 0px;
         }
         input::placeholder{
-            color: #fff;
+            color: #555555;
             font-family: sans-serif;
         }
-        button{
+        input:focus::placeholder{
+            color: #dfdfdf;
+        }
+        label{
             width: 30px;
             max-height: 30px;
             border: none;
-            background-color: #596186;
-            border-radius: 0px 5px 5px 0px;
-            margin-left: -9px;
-            cursor: pointer;
+            background-color: #cacaca;
+            border-radius: 5px 0px 0px 5px;
             transition: background-color 0.2s;
+            margin-right: -20px;
+            padding: 4px;
+            cursor: text;
             svg{
                 width: 100%;
             }
         }
-        button:hover{
-            background-color: #8f96b6;
-        }
     }
 }
 header{
+    font-family: "Caveat", cursive;
+    font-size: 5vw;
+    font-weight: bold;
     margin-top: 40px;
     width: 100%;
-    height: 400px;
-    background-color: #596186;
+    height: 300px;
+    background-color: #dfdfdf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
 }
 main{
     width: 100%;
     min-height: calc(100vh - 40px);
-    background-color: #dbadad;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    div{
+        width: 15%;
+        height: 220px;
+        background-color: #555555;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        border-radius: 5px;
+        margin: 40px 5%;
+        cursor: pointer;
+        img{
+            width: 100%;
+            height: 100%;
+            transition: transform 0.2s;
+        }
+        span{
+            position: absolute;
+            width: 100%;
+            text-align: start;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 2px;
+            font-size: 0.8rem;
+            font-family: sans-serif;
+            font-weight: bold;
+            color: #fff;
+            filter: drop-shadow(0px 0px 3px #000);
+            z-index: 5;
+        }
+    }
+    div:hover{
+        box-shadow: 0px 0px 5px #000;
+        img{
+            transform: scale(1.1);
+        }
+    }
 }
 footer{
     background-color: #596186;
