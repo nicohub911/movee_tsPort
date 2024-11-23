@@ -36,6 +36,7 @@ const infoMovie_url = `https://api.themoviedb.org/3/movie/${" idMovie "}?api_key
 const popularMovie_url = `https://api.themoviedb.org/3/movie/popular?api_key=276866c75165f669db11c444784102a8&language=es-ES&page=${" nºpage "}`;
 const genreMovie_url = `https://api.themoviedb.org/3/discover/movie?api_key=276866c75165f669db11c444784102a8&with_genres=${" idgenero "}&language=es-ES&page=${" nºpage "}`;
 const bestMovie_url = `https://api.themoviedb.org/3/movie/top_rated?api_key=276866c75165f669db11c444784102a8&language=es-ES&page=${" nºpage "}`;
+const inputSearchNav = document.getElementById("Navsearch");
 let apiData = [];
 search();
 function fetchData(url) {
@@ -51,24 +52,31 @@ function fetchData(url) {
         }
     });
 }
+// Search movies by name //============================================================================================================================================//
 function search() {
     return __awaiter(this, arguments, void 0, function* (searchText = "venom") {
-        try {
-            apiData = yield fetchData(`https://api.themoviedb.org/3/search/movie?api_key=276866c75165f669db11c444784102a8&query=${searchText}&language=es-ES&page=1`);
-            const mainhome = document.getElementById("main_Home");
-            if (mainhome) {
-                for (const element of apiData) {
-                    mainhome.innerHTML += `
+        try { //
+            apiData = yield fetchData(`https://api.themoviedb.org/3/search/movie?api_key=276866c75165f669db11c444784102a8&query=${searchText}&language=es-ES&page=1`); //
+            const mainhome = document.getElementById("main_Home"); //
+            if (mainhome) { //
+                mainhome.innerHTML = ""; //
+                for (const element of apiData) { //
+                    mainhome.innerHTML += `                                                                                                                                
             <div>
                 <span>${element.original_title}</span>
                 <img src="https://image.tmdb.org/t/p/w500/${element.poster_path}" alt="movie image">
             </div>
-            `;
-                }
-            }
+            `; //
+                } //
+            } //
         }
-        catch (error) {
-            console.log(`error:`, error);
-        }
+        catch (error) { //
+            console.log(`error:`, error); //
+        } //
     });
-}
+} //
+inputSearchNav === null || inputSearchNav === void 0 ? void 0 : inputSearchNav.addEventListener("change", () => {
+    var _a;
+    search((_a = inputSearchNav.value) === null || _a === void 0 ? void 0 : _a.toString()); //
+}); //
+//=====================================================================================================================================================================//
