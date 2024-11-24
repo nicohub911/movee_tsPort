@@ -38,45 +38,58 @@ const genreMovie_url = `https://api.themoviedb.org/3/discover/movie?api_key=2768
 const bestMovie_url = `https://api.themoviedb.org/3/movie/top_rated?api_key=276866c75165f669db11c444784102a8&language=es-ES&page=${" nºpage "}`;
 const inputSearchNav = document.getElementById("Navsearch");
 let apiData = [];
-search();
+window.addEventListener("DOMContentLoaded", () => __awaiter(void 0, void 0, void 0, function* () {
+    apiData = yield fetchData(`https://api.themoviedb.org/3/movie/popular?api_key=276866c75165f669db11c444784102a8&language=es-ES&page=1`);
+    PrintDataOnHome(apiData); // print default (popular movies) movies in the main (body)
+}));
+// fetch function to get api data ==========//  
 function fetchData(url) {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const response = yield fetch(url);
-            const data = yield response.json();
-            console.log(data.results);
-            return data.results;
+        try { //
+            const response = yield fetch(url); //
+            const data = yield response.json(); //
+            console.log(data.results); //
+            return data.results; // return data  //
         }
-        catch (error) {
-            console.error('Error:', error);
-        }
+        catch (error) { //
+            console.error('Error:', //
+            error); //
+        } //
     });
-}
-// Search movies by name //============================================================================================================================================//
+} //
+//==========================================//
+// Search movies by name ==============================================================================================================================================//
 function search() {
     return __awaiter(this, arguments, void 0, function* (searchText = "venom") {
         try { //
             apiData = yield fetchData(`https://api.themoviedb.org/3/search/movie?api_key=276866c75165f669db11c444784102a8&query=${searchText}&language=es-ES&page=1`); //
-            const mainhome = document.getElementById("main_Home"); //
-            if (mainhome) { //
-                mainhome.innerHTML = ""; //
-                for (const element of apiData) { //
-                    mainhome.innerHTML += `                                                                                                                                
-            <div>
-                <span>${element.original_title}</span>
-                <img src="https://image.tmdb.org/t/p/w500/${element.poster_path}" alt="movie image">
-            </div>
-            `; //
-                } //
-            } //
+            PrintDataOnHome(apiData); //
         }
         catch (error) { //
             console.log(`error:`, error); //
         } //
     });
 } //
+//=====================================================================================================================================================================//
+// get the value of the input search (nav) ============// 
 inputSearchNav === null || inputSearchNav === void 0 ? void 0 : inputSearchNav.addEventListener("change", () => {
     var _a;
     search((_a = inputSearchNav.value) === null || _a === void 0 ? void 0 : _a.toString()); //
 }); //
-//=====================================================================================================================================================================//
+//=====================================================//
+// print the data in the main (body) =================================================================//
+function PrintDataOnHome(data) {
+    const mainhome = document.getElementById("main_Home"); //
+    if (mainhome) { //
+        mainhome.innerHTML = ""; //
+        for (const element of data) { //
+            mainhome.innerHTML += `
+        <div>
+            <span>${element.original_title}</span>
+            <img src="https://image.tmdb.org/t/p/w500/${element.poster_path}" alt="this movie dont have a image">
+        </div>
+        `; //
+        } //
+    } //
+} //
+//====================================================================================================//

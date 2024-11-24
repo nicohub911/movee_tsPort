@@ -29,50 +29,59 @@ const bestMovie_url = `https://api.themoviedb.org/3/movie/top_rated?api_key=2768
 
 const inputSearchNav = document.getElementById("Navsearch")as HTMLInputElement;
 let apiData: Movie[] = [];
-interface Movie {
+interface Movie {// structure of api data.
     original_title: string; // Title
-    overview: string; // Sinopsis
-    vote_average: number; // Stars
-    poster_path: string; // IMG poster
-    release_date: string; // :)
-    vote_count: number; // :)
+    overview: string;       // Sinopsis
+    vote_average: number;   // Stars
+    poster_path: string;    // IMG poster
+    release_date: string;   // ;)
+    vote_count: number;     // ;)
 }
 
-search();
-
-async function fetchData(url: any) {
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(data.results);
-        return data.results;
-    } catch (error) {
-        console.error('Error:',
-            error);
-    }
-}
-
-// Search movies by name //============================================================================================================================================//
+window.addEventListener("DOMContentLoaded",async()=>{
+    apiData = await fetchData(`https://api.themoviedb.org/3/movie/popular?api_key=276866c75165f669db11c444784102a8&language=es-ES&page=1`);
+    PrintDataOnHome(apiData);// print default (popular movies) movies in the main (body)
+});
+// fetch function to get api data ==========//  
+async function fetchData(url: any) {        //
+    try {                                   //
+        const response = await fetch(url);  //
+        const data = await response.json(); //
+        return data.results;// return data  //
+    } catch (error) {                       //
+        console.error('Error:',             //
+            error);                         //
+    }                                       //
+}                                           //
+//==========================================//
+// Search movies by name ==============================================================================================================================================//
 async function search(searchText: string = "venom") {                                                                                                                  //
     try {                                                                                                                                                              //
         apiData = await fetchData(`https://api.themoviedb.org/3/search/movie?api_key=276866c75165f669db11c444784102a8&query=${searchText}&language=es-ES&page=1`);     //
-        const mainhome = document.getElementById("main_Home");                                                                                                         //
-        if (mainhome) {                                                                                                                                                //
-            mainhome.innerHTML = "";                                                                                                                                   //
-            for (const element of apiData) {                                                                                                                           //
-                mainhome.innerHTML += `                                                                                                                                
-            <div>
-                <span>${element.original_title}</span>
-                <img src="https://image.tmdb.org/t/p/w500/${element.poster_path}" alt="movie image">
-            </div>
-            `;                                                                                                                                                         //
-            }                                                                                                                                                          //
-        }                                                                                                                                                              //
+        PrintDataOnHome(apiData);                                                                                                                                      //
     }catch (error){                                                                                                                                                    //
         console.log(`error:`, error)                                                                                                                                   //
     }                                                                                                                                                                  //
 }                                                                                                                                                                      //
-inputSearchNav?.addEventListener("change",()=>{                                                                                                                        //
-    search(inputSearchNav.value?.toString());                                                                                                                          //
-});                                                                                                                                                                    //
 //=====================================================================================================================================================================//
+// get the value of the input search (nav) ============// 
+inputSearchNav?.addEventListener("change",()=>{        //
+    search(inputSearchNav.value?.toString());          //
+});                                                    //
+//=====================================================//
+// print the data in the main (body) =================================================================//
+function PrintDataOnHome(data:any) {                                                                  //
+    const mainhome = document.getElementById("main_Home");                                            //
+    if (mainhome) {                                                                                   //
+        mainhome.innerHTML = "";                                                                      //
+        for (const element of data) {                                                                 //
+            mainhome.innerHTML += `
+        <div>
+            <span>${element.original_title}</span>
+            <img src="https://image.tmdb.org/t/p/w500/${element.poster_path}" alt="this movie dont have a image">
+        </div>
+        `;                                                                                            //
+        }                                                                                             //
+    }                                                                                                 //
+}                                                                                                     //
+//====================================================================================================//

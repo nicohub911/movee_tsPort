@@ -136,7 +136,7 @@ main {
   width: 100%;
   min-height: calc(100vh - 40px);
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
 }
 main div {
@@ -149,7 +149,7 @@ main div {
   position: relative;
   overflow: hidden;
   border-radius: 5px;
-  margin: 40px 5%;
+  margin: 40px 2%;
   cursor: pointer;
 }
 main div img {
