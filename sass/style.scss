@@ -56,7 +56,11 @@ nav{
                 border-radius: 0px 0px 5px 5px;
                 li{
                     margin: 1px 0px;
+                    display: block;
+                    width: 100%;
                     a{
+                        width: 100%;
+                        display: block;
                         @include textNav();
                     }
                     a:hover{
@@ -68,7 +72,7 @@ nav{
         li:hover{
             color: #000;
             ul{
-                height: 100px;
+                height: 200px;
             }
         }
         .input_li{
@@ -168,7 +172,7 @@ main{
     }
 }
 footer{
-    background-color: #596186;
+    background-color: #292929;
     width: 100%;
     height: 100px;
 }

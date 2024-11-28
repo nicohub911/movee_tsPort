@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 /*
 URL:
 
@@ -26,21 +17,37 @@ clave: 276866c75165f669db11c444784102a8
 
 Acceder a imagenes: https://image.tmdb.org/t/p/w500/ (direccion de la imagen)
 
-Estructura de las cards HTML:
-<div>
-    <span>Movie Name</span>
-</div>
+accion = 28
+ciencia ficcion = 878
+suspenso = 53
+terror = 27
+aventura = 12
+comedia = 35
+romance = 10749
 */
-const nameMovie_url = `https://api.themoviedb.org/3/search/movie?api_key=276866c75165f669db11c444784102a8&query=${" movieNmae "}&language=es-ES&page=1`;
-const infoMovie_url = `https://api.themoviedb.org/3/movie/${" idMovie "}?api_key=276866c75165f669db11c444784102a8&language=es-ES`;
-const popularMovie_url = `https://api.themoviedb.org/3/movie/popular?api_key=276866c75165f669db11c444784102a8&language=es-ES&page=${" nºpage "}`;
-const genreMovie_url = `https://api.themoviedb.org/3/discover/movie?api_key=276866c75165f669db11c444784102a8&with_genres=${" idgenero "}&language=es-ES&page=${" nºpage "}`;
-const bestMovie_url = `https://api.themoviedb.org/3/movie/top_rated?api_key=276866c75165f669db11c444784102a8&language=es-ES&page=${" nºpage "}`;
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 const inputSearchNav = document.getElementById("Navsearch");
 let apiData = [];
 window.addEventListener("DOMContentLoaded", () => __awaiter(void 0, void 0, void 0, function* () {
     apiData = yield fetchData(`https://api.themoviedb.org/3/movie/popular?api_key=276866c75165f669db11c444784102a8&language=es-ES&page=1`);
     PrintDataOnHome(apiData); // print default (popular movies) movies in the main (body)
+    const myList = document.getElementById('myList');
+    const listItems = myList.querySelectorAll('li');
+    for (const item of listItems) { // take the specific category id and send it to a function
+        item.addEventListener("click", () => {
+            var _a;
+            console.log(item.dataset.catid);
+            ChoseCategory((_a = item.dataset.catid) === null || _a === void 0 ? void 0 : _a.toString());
+        });
+    }
 }));
 // fetch function to get api data ==========//  
 function fetchData(url) {
@@ -48,7 +55,6 @@ function fetchData(url) {
         try { //
             const response = yield fetch(url); //
             const data = yield response.json(); //
-            console.log(data.results); //
             return data.results; // return data  //
         }
         catch (error) { //
@@ -93,3 +99,16 @@ function PrintDataOnHome(data) {
     } //
 } //
 //====================================================================================================//
+//Recive the category id and send the link (with the id) to print the movies ============================================================================================//
+function ChoseCategory(category) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try { //
+            apiData = yield fetchData(`https://api.themoviedb.org/3/discover/movie?api_key=276866c75165f669db11c444784102a8&with_genres=${category}&language=es-ES&page=1`); //
+            PrintDataOnHome(apiData); //
+        }
+        catch (error) { //
+            console.log(error); //
+        } //
+    });
+} //
+//=======================================================================================================================================================================//

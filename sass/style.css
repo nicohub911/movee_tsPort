@@ -62,8 +62,12 @@ nav ul li ul {
 }
 nav ul li ul li {
   margin: 1px 0px;
+  display: block;
+  width: 100%;
 }
 nav ul li ul li a {
+  width: 100%;
+  display: block;
   color: #5c5c5c;
   font-size: 15px;
   font-family: sans-serif;
@@ -76,7 +80,7 @@ nav ul li:hover {
   color: #000;
 }
 nav ul li:hover ul {
-  height: 100px;
+  height: 200px;
 }
 nav ul .input_li {
   display: flex;
@@ -179,7 +183,7 @@ main div:hover img {
 }
 
 footer {
-  background-color: #596186;
+  background-color: #292929;
   width: 100%;
   height: 100px;
 }/*# sourceMappingURL=style.css.map */
