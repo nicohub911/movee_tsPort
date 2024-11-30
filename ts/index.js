@@ -16,7 +16,7 @@ https://api.themoviedb.org/3/movie/top_rated?api_key=tu_clave_api&language=es-ES
 clave: 276866c75165f669db11c444784102a8
 
 Acceder a imagenes: https://image.tmdb.org/t/p/w500/ (direccion de la imagen)
-
+<li></li>
 accion = 28
 ciencia ficcion = 878
 suspenso = 53
@@ -39,13 +39,22 @@ let apiData = [];
 window.addEventListener("DOMContentLoaded", () => __awaiter(void 0, void 0, void 0, function* () {
     apiData = yield fetchData(`https://api.themoviedb.org/3/movie/popular?api_key=276866c75165f669db11c444784102a8&language=es-ES&page=1`);
     PrintDataOnHome(apiData); // print default (popular movies) movies in the main (body)
+    // take the specific category id and send it to a function
     const myList = document.getElementById('myList');
     const listItems = myList.querySelectorAll('li');
-    for (const item of listItems) { // take the specific category id and send it to a function
+    for (const item of listItems) {
         item.addEventListener("click", () => {
             var _a;
-            console.log(item.dataset.catid);
             ChoseCategory((_a = item.dataset.catid) === null || _a === void 0 ? void 0 : _a.toString());
+        });
+    }
+    // save te id and the name of the movie in the local storage when is clicked
+    const cards = document.querySelectorAll('.card_movie');
+    for (const card of cards) {
+        card.addEventListener("click", () => {
+            console.log(card.dataset.movieid);
+            localStorage.setItem(`movieid`, card.dataset.movieid);
+            localStorage.setItem(`moviename`, card.dataset.moviename);
         });
     }
 }));
@@ -69,6 +78,7 @@ function search() {
     return __awaiter(this, arguments, void 0, function* (searchText = "venom") {
         try { //
             apiData = yield fetchData(`https://api.themoviedb.org/3/search/movie?api_key=276866c75165f669db11c444784102a8&query=${searchText}&language=es-ES&page=1`); //
+            console.log(apiData);
             PrintDataOnHome(apiData); //
         }
         catch (error) { //
@@ -90,10 +100,10 @@ function PrintDataOnHome(data) {
         mainhome.innerHTML = ""; //
         for (const element of data) { //
             mainhome.innerHTML += `
-        <div>
+        <a href="./html/movieInfo.html" class="card_movie" data-movieid="${element.id}" data-moviename="${element.original_title}">
             <span>${element.original_title}</span>
             <img src="https://image.tmdb.org/t/p/w500/${element.poster_path}" alt="this movie dont have a image">
-        </div>
+        </a>
         `; //
         } //
     } //

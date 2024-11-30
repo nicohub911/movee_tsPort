@@ -15,7 +15,7 @@ https://api.themoviedb.org/3/movie/top_rated?api_key=tu_clave_api&language=es-ES
 clave: 276866c75165f669db11c444784102a8
 
 Acceder a imagenes: https://image.tmdb.org/t/p/w500/ (direccion de la imagen)
-
+<li></li>
 accion = 28
 ciencia ficcion = 878
 suspenso = 53
@@ -29,6 +29,7 @@ romance = 10749
 const inputSearchNav = document.getElementById("Navsearch")as HTMLInputElement;
 let apiData: Movie[] = [];
 interface Movie {// structure of api data.
+    id: number;             // id :)
     original_title: string; // Title
     overview: string;       // Sinopsis
     vote_average: number;   // Stars
@@ -40,15 +41,23 @@ interface Movie {// structure of api data.
 window.addEventListener("DOMContentLoaded",async()=>{
     apiData = await fetchData(`https://api.themoviedb.org/3/movie/popular?api_key=276866c75165f669db11c444784102a8&language=es-ES&page=1`);
     PrintDataOnHome(apiData);// print default (popular movies) movies in the main (body)
+    // take the specific category id and send it to a function
     const myList = document.getElementById('myList') as HTMLUListElement;
     const listItems = myList.querySelectorAll('li');
-    for (const item of listItems) { // take the specific category id and send it to a function
+    for (const item of listItems) {
         item.addEventListener("click",()=>{
-            console.log(item.dataset.catid);
             ChoseCategory(item.dataset.catid?.toString());
         });
     }
-
+    // save te id and the name of the movie in the local storage when is clicked
+    const cards = document.querySelectorAll('.card_movie')as NodeListOf<HTMLElement>;
+    for (const card of cards) {
+        card.addEventListener("click",()=>{
+            console.log(card.dataset.movieid as string);
+            localStorage.setItem(`movieid`, card.dataset.movieid as string)
+            localStorage.setItem(`moviename`, card.dataset.moviename as string)
+        });
+    }
 });
 // fetch function to get api data ==========//  
 async function fetchData(url: any) {        //
@@ -66,6 +75,7 @@ async function fetchData(url: any) {        //
 async function search(searchText: string = "venom") {                                                                                                                  //
     try {                                                                                                                                                              //
         apiData = await fetchData(`https://api.themoviedb.org/3/search/movie?api_key=276866c75165f669db11c444784102a8&query=${searchText}&language=es-ES&page=1`);     //
+        console.log(apiData);
         PrintDataOnHome(apiData);                                                                                                                                      //
     }catch (error){                                                                                                                                                    //
         console.log(`error:`, error)                                                                                                                                   //
@@ -84,10 +94,10 @@ function PrintDataOnHome(data:any) {                                            
         mainhome.innerHTML = "";                                                                      //
         for (const element of data) {                                                                 //
             mainhome.innerHTML += `
-        <div>
+        <a href="./html/movieInfo.html" class="card_movie" data-movieid="${element.id}" data-moviename="${element.original_title}">
             <span>${element.original_title}</span>
             <img src="https://image.tmdb.org/t/p/w500/${element.poster_path}" alt="this movie dont have a image">
-        </div>
+        </a>
         `;                                                                                            //
         }                                                                                             //
     }                                                                                                 //
