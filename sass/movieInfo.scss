@@ -133,9 +133,22 @@ nav{
             div{
                 margin: 100px 0px;
                 display: flex;
-                justify-content: space-around;
+                flex-direction: column;
+                margin: 50px 50px;
                 ul{
+                    margin-top: 50px;
+                    width: 100%;
                     list-style: none;
+                    display: flex;
+                    flex-wrap: wrap;
+                    li{
+                        width: 50%;
+                        text-align: center;
+                        font-family: sans-serif;
+                        font-size: 1rem;
+                        color: #000;
+                        margin: 10px 0px;
+                    }
                 }
             }
         }
@@ -157,12 +170,14 @@ nav{
             width: 100%;
             padding: 10px 15%;
             display: flex;
-            align-items: center;
+            align-items: stretch;
+            gap: 20px;
             aside{
                 width: 25%;
                 img{
                     width: 100%;
                     aspect-ratio: 5/8;
+                    border-radius: 5px;
                     background-color: #000;
                 }
             }
@@ -170,10 +185,25 @@ nav{
                 width: 75%;
                 height: 100%;
                 display: flex;
-                justify-content: space-around;
+                flex-direction: column;
+                gap: 20px;
+                p{
+                    font-size: 1rem;
+                    font-family: sans-serif;
+                    text-align: justify;
+                    padding: 5px;
+                }
                 ul{
+                    width: 100%;
                     list-style: none;
+                    display: flex;
+                    flex-wrap: wrap;
                     li{
+                        width: 50%;
+                        text-align: center;
+                        font-family: sans-serif;
+                        font-size: 1rem;
+                        color: #000;
                         margin: 10px 0px;
                     }
                 }
