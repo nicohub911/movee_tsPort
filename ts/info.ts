@@ -68,20 +68,29 @@ document.addEventListener("DOMContentLoaded", async () => {
             // print the movie structure in the html
             if (container) {
                 container.innerHTML = `
+                <header>
+                    <img src="https://image.tmdb.org/t/p/w500${movieinfo.poster_path}" alt="poster of the movie">
                     <h2>${movieinfo.original_title}</h2>
-                    <div class="info_movie">
-                        <aside>
-                            <img src="https://image.tmdb.org/t/p/w500${movieinfo.poster_path}" alt="poster of the movie">
-                        </aside>
-                        <div>
-                            <p>${movieinfo.overview}</p>
-                            <ul>
-                                <li>Release date: ${movieinfo.release_date}</li>
-                                <li>Vote count: ${movieinfo.vote_count}</li>
-                                <li>Categories: ${catGroup}</li>    
-                            </ul>
-                        </div>
+                </header>
+                <div class="info_movie">
+                    <h3>Synopsis</h3>
+                    <div>${catGroup}</div>
+                    <p>${movieinfo.overview}</p>
+                    <ul>
+                        <li>Release date: ${movieinfo.release_date}</li>
+                        <li>Vote count: ${movieinfo.vote_count}</li>    
+                    </ul>
+                </div>
+                <aside>
+                    <h3>Your opinion</h3>
+                    <div>
+                        <input type="button" value="">
+                        <input type="button" value="">
+                        <input type="button" value="">
+                        <input type="button" value="">
+                        <input type="button" value="">
                     </div>
+                </aside>
                 `;
             }
         }
