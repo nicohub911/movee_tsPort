@@ -192,9 +192,21 @@ function specificDataDealer() {
         }
     });
 }
+// save the search and redirect to index
 const inputSearch = document.getElementById("Navsearch");
 inputSearch === null || inputSearch === void 0 ? void 0 : inputSearch.addEventListener("change", () => {
     var _a;
     localStorage.setItem("search", (_a = inputSearch.value) === null || _a === void 0 ? void 0 : _a.toString());
     window.location.href = "../index.html";
 });
+const myListCat = document.getElementById('myList');
+const listItemsCat = myListCat.querySelectorAll('li');
+for (const item of listItemsCat) {
+    item.addEventListener("click", () => {
+        var _a, _b;
+        if ((_a = item.dataset.catid) === null || _a === void 0 ? void 0 : _a.toString()) {
+            localStorage.setItem("categoryInfo", (_b = item.dataset.catid) === null || _b === void 0 ? void 0 : _b.toString());
+            window.location.href = "../index.html";
+        }
+    });
+}

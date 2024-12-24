@@ -187,8 +187,20 @@ async function specificDataDealer(): Promise<Movie | undefined> {
         }
     }
 }
+// save the search and redirect to index
 const inputSearch = document.getElementById("Navsearch")as HTMLInputElement;
 inputSearch?.addEventListener("change",()=>{
     localStorage.setItem("search", inputSearch.value?.toString());
     window.location.href = "../index.html";
 });
+
+const myListCat = document.getElementById('myList') as HTMLUListElement;
+const listItemsCat = myListCat.querySelectorAll('li');
+for (const item of listItemsCat) {
+    item.addEventListener("click",()=>{
+        if (item.dataset.catid?.toString()) {
+            localStorage.setItem("categoryInfo", item.dataset.catid?.toString());  
+            window.location.href = "../index.html";
+        }
+    });
+}

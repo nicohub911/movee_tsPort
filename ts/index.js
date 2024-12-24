@@ -11,9 +11,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const inputSearchNav = document.getElementById("Navsearch");
 let apiData = [];
 window.addEventListener("DOMContentLoaded", () => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _a, _b;
+    if (localStorage.getItem("categoryInfo")) {
+        ChoseCategory((_a = localStorage.getItem("categoryInfo")) === null || _a === void 0 ? void 0 : _a.toString());
+        localStorage.removeItem("categoryInfo");
+    }
+    // take the search of infoMovie
     if (localStorage.getItem("search")) {
-        search((_a = localStorage.getItem("search")) === null || _a === void 0 ? void 0 : _a.toString());
+        search((_b = localStorage.getItem("search")) === null || _b === void 0 ? void 0 : _b.toString());
         localStorage.removeItem("search");
     }
     apiData = yield fetchData(`https://api.themoviedb.org/3/movie/popular?api_key=276866c75165f669db11c444784102a8&language=es-ES&page=1`);
@@ -101,3 +106,10 @@ function ChoseCategory(category) {
     });
 } //
 //=======================================================================================================================================================================//
+const buttonWarning = document.getElementById("warningButton"); //
+const warningPanel = document.getElementById("warningPanel");
+buttonWarning === null || buttonWarning === void 0 ? void 0 : buttonWarning.addEventListener("click", () => {
+    if (warningPanel) {
+        warningPanel.style.display = "none";
+    }
+});

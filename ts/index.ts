@@ -12,6 +12,11 @@ interface Movie {// structure of api data.
 }
 
 window.addEventListener("DOMContentLoaded",async()=>{
+    if (localStorage.getItem("categoryInfo")) {
+        ChoseCategory(localStorage.getItem("categoryInfo")?.toString());
+        localStorage.removeItem("categoryInfo");
+    }
+    // take the search of infoMovie
     if (localStorage.getItem("search")) {
         search(localStorage.getItem("search")?.toString());
         localStorage.removeItem("search");
@@ -90,4 +95,10 @@ async function ChoseCategory(category:any) {                                    
     }                                                                                                                                                                    //
 }                                                                                                                                                                        //
 //=======================================================================================================================================================================//
-
+const buttonWarning = document.getElementById("warningButton");//
+const warningPanel = document.getElementById("warningPanel");
+buttonWarning?.addEventListener("click", ()=>{
+    if (warningPanel) {
+        warningPanel.style.display = "none";   
+    }   
+});
