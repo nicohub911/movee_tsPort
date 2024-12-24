@@ -192,3 +192,9 @@ function specificDataDealer() {
         }
     });
 }
+const inputSearch = document.getElementById("Navsearch");
+inputSearch === null || inputSearch === void 0 ? void 0 : inputSearch.addEventListener("change", () => {
+    var _a;
+    localStorage.setItem("search", (_a = inputSearch.value) === null || _a === void 0 ? void 0 : _a.toString());
+    window.location.href = "../index.html";
+});

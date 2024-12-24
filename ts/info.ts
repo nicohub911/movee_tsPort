@@ -187,3 +187,8 @@ async function specificDataDealer(): Promise<Movie | undefined> {
         }
     }
 }
+const inputSearch = document.getElementById("Navsearch")as HTMLInputElement;
+inputSearch?.addEventListener("change",()=>{
+    localStorage.setItem("search", inputSearch.value?.toString());
+    window.location.href = "../index.html";
+});
